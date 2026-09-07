@@ -3,7 +3,7 @@ import  {db}  from "../config/payroll_config.js";
 // here i will be creating a function that fetches the payroll informations and returns an error and a message if the api does not get.
 
 export const getPayroll = async () => {
-  let [rows] = await db.query(`SELECT * FROM payroll_table`)
+  let [rows] = await db.query(`SELECT * FROM payroll`)
   return rows;
 
 };
@@ -16,11 +16,11 @@ export const getPayrollData = async () => {
   i.position,
   i.department,
   i.salary AS base_salary,
-  payroll_table.hours_worked,
-  payroll_table.leave_deductions,
-  payroll_table.final_salary
-  FROM payroll_table
-  INNER JOIN employees e ON payroll_table.employee_id = e.employee_id
+  p.hours_worked,
+  p.leave_deductions,
+  p.final_salary
+  FROM payroll p
+  INNER JOIN employees e ON p.employee_id = e.employee_id
   LEFT JOIN employee_information i ON i.employee_id = e.employee_id;
   `;
   const [rows] = await db.query(query);
@@ -30,7 +30,7 @@ export const getPayrollData = async () => {
 
 export const newPayrollData = async (employee_id, hours_worked, leave_deductions, final_salary) => {
   const query = `
-  INSERT INTO payroll_table (employee_id, hours_worked, leave_deductions, final_salary)
+  INSERT INTO payroll (employee_id, hours_worked, leave_deductions, final_salary)
   VALUES (?, ?, ?, ?)
   ON DUPLICATE KEY UPDATE 
     hours_worked = VALUES(hours_worked),
@@ -50,13 +50,13 @@ export const getSinglePayrollData = async (id) => {
   i.position,
   i.department,
   i.salary AS base_salary,
-  payroll_table.hours_worked,
-  payroll_table.leave_deductions,
-  payroll_table.final_salary
-  FROM payroll_table
-  INNER JOIN employees e ON payroll_table.employee_id = e.employee_id
+  p.hours_worked,
+  p.leave_deductions,
+  p.final_salary
+  FROM payroll p
+  INNER JOIN employees e ON p.employee_id = e.employee_id
   LEFT JOIN employee_information i ON i.employee_id = e.employee_id
-  WHERE payroll_table.employee_id = ?;
+  WHERE p.employee_id = ?;
   `;
   const [rows] = await db.query(query, [id]);
   return rows[0];

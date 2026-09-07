@@ -1,0 +1,5 @@
+◇ injected env (6) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+ModernTech HR & Payroll API listening on port 3000
+Database connected.
+MySQL database connected successfully.

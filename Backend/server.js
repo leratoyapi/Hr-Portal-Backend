@@ -45,7 +45,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/leave', leaveRoutes);
-app.use('/api/employees', employeeRoutes);
+app.use('/api/employees', employeesRouter);
 app.use('/employees', employeesRouter); // From payroll server block
 app.use('/payroll', payrollRouter);     // From payroll server block
 app.use('/api/dashboard', dashboardRoutes);
