@@ -3,3 +3,4 @@
 ModernTech HR & Payroll API listening on port 3000
 Database connected.
 MySQL database connected successfully.
+[SERVER LOG]: Fetching payslip data for employee ID: 1
